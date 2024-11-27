@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.ecommerce.api.ApiService
 import com.example.ecommerce.model.Product
 import com.example.ecommerce.model.ProductAdapter
-import com.example.practica3.ApiClient
+import com.example.ecommerce.api.ApiClient
 
 
 class MainActivity : ComponentActivity() {

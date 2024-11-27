@@ -8,7 +8,7 @@ import retrofit2.http.Query
 
 interface ApiService {
     // Get all products
-    @GET("/products")
+    @GET("api/products/all")
     fun getAllProducts(): Call<List<Product>>
 
     // Añadir un producto (POST request example)

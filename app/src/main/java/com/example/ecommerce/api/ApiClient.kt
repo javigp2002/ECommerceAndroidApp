@@ -1,4 +1,4 @@
-package com.example.practica3
+package com.example.ecommerce.api
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
