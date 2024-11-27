@@ -1,47 +1,59 @@
 package com.example.ecommerce
 
-import android.os.Bundle
 import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.ecommerce.ui.theme.ECommerceTheme
+import android.os.Bundle
+import android.util.Log
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.ecommerce.api.ApiService
+import com.example.ecommerce.model.Product
+import com.example.ecommerce.model.ProductAdapter
+import com.example.practica3.ApiClient
+
 
 class MainActivity : ComponentActivity() {
+    private lateinit var productAdapter: ProductAdapter
+    private lateinit var recyclerView: RecyclerView
+    private val apiService = ApiClient.retrofit.create(ApiService::class.java)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            ECommerceTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+        setContentView(R.layout.activity_main)
+
+        // configurar RecyclerView
+        recyclerView = findViewById(R.id.recyclerViewProducts)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+
+        // traer los datos del API
+        fetchProducts()
+    }
+
+    private fun fetchProducts() {
+
+        apiService.getAllProducts().enqueue(object : Callback<List<Product>> {
+            override fun onResponse(
+                call: Call<List<Product>>,
+                response: Response<List<Product>>
+            ) {
+                if (response.isSuccessful) {
+                    val productList = response.body()
+                    Log.d("API_RESPONSE", "Productos: $productList")
+                    productList?.let {
+                        // Initialize the adapter with the product list
+                        productAdapter = ProductAdapter(it)
+                        recyclerView.adapter = productAdapter
+                    }
+                } else {
+                    Log.e("API_ERROR", "Error code: ${response.code()}")
                 }
             }
-        }
-    }
-}
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    ECommerceTheme {
-        Greeting("Android")
+            override fun onFailure(call: Call<List<Product>>, t: Throwable) {
+                Log.e("API_ERROR", "Failure: ${t.message}")
+            }
+        })
     }
 }
