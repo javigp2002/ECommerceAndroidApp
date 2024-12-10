@@ -5,9 +5,6 @@ import retrofit2.http.GET
 
 interface ProductsDatasource {
 
-    // Get all products
     @GET("api/products/all")
-    suspend fun getAllProducts(): List<Product>?
-
-
+    suspend fun getAllProducts(): MutableList<Product>?
 }

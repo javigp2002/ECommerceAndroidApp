@@ -18,7 +18,7 @@ class AppContainerImpl : AppContainer {
     }
 
     override val productsRepository: ProductsRepository by lazy {
-        ProductsRepositoryImpl(productDatasource)
+        ProductsRepositoryImpl.getInstance(productDatasource)
     }
 
     override val mainActivityViewModel: MainActivityViewModel by lazy {

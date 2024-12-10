@@ -8,20 +8,47 @@ import com.example.ecommerce.model.Product
 import kotlinx.coroutines.launch
 
 class MainActivityViewModel(private val productsRepository: ProductsRepository) : ViewModel() {
+    private val actualProducts: MutableList<Product> = mutableListOf()
+
     val products: MutableLiveData<List<Product>> by lazy {
         MutableLiveData<List<Product>>()
     }
 
     init {
         viewModelScope.launch {
-            val productsItems = productsRepository.getProducts()
-            products.setValue(productsItems)
+            actualProducts.addAll(productsRepository.getProducts())
+
+            products.setValue(actualProducts.toList())
         }
     }
 
     fun updateProducts() {
         viewModelScope.launch {
-            products.setValue(productsRepository.getProducts())
+            products.setValue(actualProducts.toList())
         }
     }
+
+    fun manageProduct(product: Product) {
+        viewModelScope.launch {
+            if (isProductOnCart(product.id)) {
+                productsRepository.removeProductFromCart(product)
+                updateProductsOnCart(product.id, false)
+            } else {
+                productsRepository.addProductToCart(product)
+                updateProductsOnCart(product.id, true)
+            }
+
+            updateProducts()
+        }
+
+    }
+
+    private fun isProductOnCart(id: Long): Boolean {
+        return productsRepository.isProductOnCart(id)
+    }
+
+    private fun updateProductsOnCart(productId: Long, isOnCart: Boolean) {
+        actualProducts.find { it.id == productId }?.onCart = isOnCart
+    }
+
 }
