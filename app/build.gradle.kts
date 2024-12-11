@@ -49,6 +49,8 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.androidx.viewpager2)
+    implementation(libs.material)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -60,6 +62,7 @@ dependencies {
     // Retrofit for API requests
     implementation ("com.squareup.okhttp3:logging-interceptor:4.11.0")
     implementation ("com.squareup.okhttp3:okhttp:4.11.0") // OkHttp library
+    implementation("androidx.constraintlayout:constraintlayout:2.2.0")
 
     // Retrofit for API requests
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
@@ -72,4 +75,8 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.3.1")
     implementation("androidx.core:core-ktx:1.7.0")
     implementation("androidx.recyclerview:recyclerview:1.2.1")
+
+    val fragment_version = "1.8.3"
+    implementation("androidx.fragment:fragment:$fragment_version")
+
 }

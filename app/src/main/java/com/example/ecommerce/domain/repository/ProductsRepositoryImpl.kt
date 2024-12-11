@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import com.example.ecommerce.MyApplication
 import com.example.ecommerce.api.datasource.products.ProductsDatasource
+import com.example.ecommerce.model.AddProductModel
 import com.example.ecommerce.model.Product
 import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
@@ -35,6 +36,21 @@ class ProductsRepositoryImpl(private val api: ProductsDatasource) : ProductsRepo
         return products ?: mutableListOf()
     }
 
+    override suspend fun getCartProducts(): MutableList<Product> {
+        return cart
+    }
+
+
+    override suspend fun addProductToList(product: AddProductModel) {
+        withContext(Dispatchers.IO) {
+            try {
+                api.addProduct(product)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+
+        }
+    }
 
     override suspend fun addProductToCart(product: Product) {
         cart.add(product)

@@ -18,7 +18,8 @@ class ProductAdapter :
     var onProductClicked: (Product) -> Unit = {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.product_item, parent, false)
+        val view =
+            LayoutInflater.from(parent.context).inflate(R.layout.product_item_v2, parent, false)
         return ProductViewHolder(view)
     }
 

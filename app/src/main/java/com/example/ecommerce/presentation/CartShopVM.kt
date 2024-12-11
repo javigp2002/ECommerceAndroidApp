@@ -7,7 +7,7 @@ import com.example.ecommerce.domain.repository.ProductsRepository
 import com.example.ecommerce.model.Product
 import kotlinx.coroutines.launch
 
-class MainActivityViewModel(private val productsRepository: ProductsRepository) : ViewModel() {
+class CartShopVm(private val productsRepository: ProductsRepository) : ViewModel() {
     private val actualProducts: MutableList<Product> = mutableListOf()
 
     val products: MutableLiveData<List<Product>> by lazy {
@@ -16,7 +16,7 @@ class MainActivityViewModel(private val productsRepository: ProductsRepository) 
 
     init {
         viewModelScope.launch {
-            actualProducts.addAll(productsRepository.getProducts())
+            actualProducts.addAll(productsRepository.getCartProducts())
 
             products.setValue(actualProducts.toList())
         }
@@ -24,6 +24,8 @@ class MainActivityViewModel(private val productsRepository: ProductsRepository) 
 
     fun updateProducts() {
         viewModelScope.launch {
+            actualProducts.clear()
+            actualProducts.addAll(productsRepository.getCartProducts())
             products.setValue(actualProducts.toList())
         }
     }
@@ -50,5 +52,6 @@ class MainActivityViewModel(private val productsRepository: ProductsRepository) 
     private fun updateProductsOnCart(productId: Long, isOnCart: Boolean) {
         actualProducts.find { it.id == productId }?.onCart = isOnCart
     }
+
 
 }
