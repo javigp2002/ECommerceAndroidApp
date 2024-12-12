@@ -9,11 +9,14 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ecommerce.R
+import com.example.ecommerce.utils.MyNumberFormat
 
 class ProductAdapter :
     ListAdapter<Product, ProductAdapter.ProductViewHolder>(ProductDiffCallback()) {
+
     private val onCartName = "Remove from cart"
     private val notOnCartName = "Add to cart"
+
 
     var onProductClicked: (Product) -> Unit = {}
 
@@ -27,7 +30,7 @@ class ProductAdapter :
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
         val product = currentList[position]
         holder.textViewName.text = product.name
-        holder.textViewPrice.text = "${product.price}"
+        holder.textViewPrice.text = MyNumberFormat.doubleToStringEuros(product.price)
         holder.buttonAddProduct.setOnClickListener {
             onProductClicked(product)
         }

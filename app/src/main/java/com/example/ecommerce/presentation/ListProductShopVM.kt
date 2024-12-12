@@ -16,10 +16,7 @@ class ListProductShopVm(private val productsRepository: ProductsRepository) : Vi
 
     init {
         viewModelScope.launch {
-            actualProducts.addAll(productsRepository.getProducts())
-            actualProducts.forEach {
-                it.onCart = productsRepository.isProductOnCart(it.id)
-            }
+            updateActualProductsOnCart()
 
             products.setValue(actualProducts.toList())
         }
@@ -27,6 +24,7 @@ class ListProductShopVm(private val productsRepository: ProductsRepository) : Vi
 
     fun updateProducts() {
         viewModelScope.launch {
+            updateActualProductsOnCart()
             products.setValue(actualProducts.toList())
         }
     }
@@ -54,5 +52,12 @@ class ListProductShopVm(private val productsRepository: ProductsRepository) : Vi
         actualProducts.find { it.id == productId }?.onCart = isOnCart
     }
 
+    suspend fun updateActualProductsOnCart() {
+        actualProducts.clear()
+        actualProducts.addAll(productsRepository.getProducts())
+        actualProducts.forEach {
+            it.onCart = productsRepository.isProductOnCart(it.id)
+        }
+    }
 
 }

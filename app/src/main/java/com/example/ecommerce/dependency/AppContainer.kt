@@ -4,6 +4,7 @@ import com.example.ecommerce.api.ApiClient
 import com.example.ecommerce.api.datasource.products.ProductsDatasource
 import com.example.ecommerce.domain.repository.ProductsRepository
 import com.example.ecommerce.domain.repository.ProductsRepositoryImpl
+import com.example.ecommerce.presentation.CartCheckoutVM
 import com.example.ecommerce.presentation.CartShopVm
 import com.example.ecommerce.presentation.ListProductShopVm
 
@@ -11,6 +12,7 @@ interface AppContainer {
     val productsRepository: ProductsRepository
     val listProductShopVm: ListProductShopVm
     val cartShopVm: CartShopVm
+    val cartCheckoutVm: CartCheckoutVM
 
 }
 
@@ -29,5 +31,9 @@ class AppContainerImpl : AppContainer {
 
     override val cartShopVm: CartShopVm by lazy {
         CartShopVm(productsRepository)
+    }
+
+    override val cartCheckoutVm: CartCheckoutVM by lazy {
+        CartCheckoutVM(productsRepository)
     }
 }

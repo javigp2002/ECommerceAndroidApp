@@ -11,4 +11,5 @@ interface ProductsRepository {
     suspend fun addProductToCart(product: Product)
     fun isProductOnCart(productId: Long): Boolean
     suspend fun removeProductFromCart(product: Product)
+    suspend fun buyCartProducts()
 }

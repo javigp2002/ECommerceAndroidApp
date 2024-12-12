@@ -68,6 +68,21 @@ class ProductsRepositoryImpl(private val api: ProductsDatasource) : ProductsRepo
         sharedPreferences.edit().putString("cart", cartJson).apply()
     }
 
+    override suspend fun buyCartProducts() {
+        withContext(Dispatchers.IO) {
+            try {
+                api.buyCartProducts(cart)
+
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+
+        }
+        cart.clear()
+        sharedPreferences.edit().putString("cart", "").apply()
+
+    }
+
     companion object {
         @Volatile
         private var INSTANCE: ProductsRepositoryImpl? = null

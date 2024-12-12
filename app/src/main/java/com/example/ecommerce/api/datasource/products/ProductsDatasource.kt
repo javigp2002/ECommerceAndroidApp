@@ -14,4 +14,7 @@ interface ProductsDatasource {
 
     @POST("/api/products/add")
     suspend fun addProduct(@Body product: AddProductModel): String
+
+    @POST("/api/cart/buy")
+    suspend fun buyCartProducts(cart: MutableList<Product>)
 }

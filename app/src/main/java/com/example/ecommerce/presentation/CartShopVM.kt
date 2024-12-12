@@ -9,9 +9,15 @@ import kotlinx.coroutines.launch
 
 class CartShopVm(private val productsRepository: ProductsRepository) : ViewModel() {
     private val actualProducts: MutableList<Product> = mutableListOf()
+    private var totalValueProducts: Double = 0.0
+
 
     val products: MutableLiveData<List<Product>> by lazy {
         MutableLiveData<List<Product>>()
+    }
+
+    val valueObserver: MutableLiveData<Double> by lazy {
+        MutableLiveData<Double>()
     }
 
     init {
@@ -19,6 +25,7 @@ class CartShopVm(private val productsRepository: ProductsRepository) : ViewModel
             actualProducts.addAll(productsRepository.getCartProducts())
 
             products.setValue(actualProducts.toList())
+            valueObserver.setValue(totalValueProducts)
         }
     }
 
@@ -26,7 +33,11 @@ class CartShopVm(private val productsRepository: ProductsRepository) : ViewModel
         viewModelScope.launch {
             actualProducts.clear()
             actualProducts.addAll(productsRepository.getCartProducts())
+
+            updateValueProduct()
+
             products.setValue(actualProducts.toList())
+            valueObserver.setValue(totalValueProducts)
         }
     }
 
@@ -53,5 +64,11 @@ class CartShopVm(private val productsRepository: ProductsRepository) : ViewModel
         actualProducts.find { it.id == productId }?.onCart = isOnCart
     }
 
+    private fun updateValueProduct() {
+        totalValueProducts = 0.0
+        actualProducts.forEach {
+            totalValueProducts += it.price
+        }
+    }
 
 }
