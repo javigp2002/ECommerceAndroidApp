@@ -24,9 +24,9 @@ class MainActivity : FragmentActivity() {
 
         viewPager.adapter = MainViewPagerAdapter(this)
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
-            tab.text = when (position) {
-                0 -> "Shop"
-                else -> "Cart"
+            tab.icon = when (position) {
+                0 -> ContextCompat.getDrawable(this, home_24px)
+                else -> ContextCompat.getDrawable(this, shopping_cart_24px)
             }
         }.attach()
 
