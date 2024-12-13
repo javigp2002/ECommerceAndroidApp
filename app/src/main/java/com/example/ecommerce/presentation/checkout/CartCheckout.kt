@@ -1,4 +1,4 @@
-package com.example.ecommerce.presentation
+package com.example.ecommerce.presentation.checkout
 
 import android.app.AlertDialog
 import android.app.Dialog
@@ -11,9 +11,9 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ecommerce.R
+import com.example.ecommerce.adapters.ProductCheckoutAdapter
 import com.example.ecommerce.dependency.AppContainerImpl
 import com.example.ecommerce.model.Product
-import com.example.ecommerce.model.ProductCheckoutAdapter
 import com.example.ecommerce.utils.MyNumberFormat
 
 

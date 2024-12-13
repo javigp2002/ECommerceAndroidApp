@@ -26,7 +26,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".presentation.CartCheckout"
+            android:name=".presentation.checkout.CartCheckout"
             android:exported="true"
             android:theme="@style/Theme.ECommerce">
             <intent-filter>

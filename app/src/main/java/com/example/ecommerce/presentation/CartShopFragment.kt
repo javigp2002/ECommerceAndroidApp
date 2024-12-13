@@ -12,9 +12,10 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ecommerce.R
+import com.example.ecommerce.adapters.ProductAdapter
 import com.example.ecommerce.dependency.AppContainerImpl
 import com.example.ecommerce.model.Product
-import com.example.ecommerce.model.ProductAdapter
+import com.example.ecommerce.presentation.checkout.CartCheckout
 import com.example.ecommerce.utils.MyNumberFormat
 
 class CartShopFragment private constructor() : Fragment() {

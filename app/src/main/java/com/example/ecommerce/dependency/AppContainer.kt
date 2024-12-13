@@ -4,9 +4,9 @@ import com.example.ecommerce.api.ApiClient
 import com.example.ecommerce.api.datasource.products.ProductsDatasource
 import com.example.ecommerce.domain.repository.ProductsRepository
 import com.example.ecommerce.domain.repository.ProductsRepositoryImpl
-import com.example.ecommerce.presentation.CartCheckoutVM
 import com.example.ecommerce.presentation.CartShopVm
 import com.example.ecommerce.presentation.ListProductShopVm
+import com.example.ecommerce.presentation.checkout.CartCheckoutVM
 
 interface AppContainer {
     val productsRepository: ProductsRepository

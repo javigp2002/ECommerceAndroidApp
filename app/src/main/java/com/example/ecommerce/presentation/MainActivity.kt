@@ -1,12 +1,15 @@
 package com.example.ecommerce.presentation
 
 import android.os.Bundle
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.example.ecommerce.R
+import com.example.ecommerce.R.drawable.home_24px
+import com.example.ecommerce.R.drawable.shopping_cart_24px
+import com.example.ecommerce.adapters.MainViewPagerAdapter
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-
 
 class MainActivity : FragmentActivity() {
     private lateinit var viewPager: ViewPager2
