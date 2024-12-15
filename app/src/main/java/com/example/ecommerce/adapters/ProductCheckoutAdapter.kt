@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ecommerce.R
-import com.example.ecommerce.model.Product
+import com.example.ecommerce.domain.repository.model.Product
 import com.example.ecommerce.utils.MyNumberFormat
 
 class ProductCheckoutAdapter :

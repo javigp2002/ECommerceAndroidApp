@@ -1,7 +1,7 @@
 package com.example.ecommerce.domain.repository
 
-import com.example.ecommerce.model.AddProductModel
-import com.example.ecommerce.model.Product
+import com.example.ecommerce.domain.repository.model.AddProductModel
+import com.example.ecommerce.domain.repository.model.Product
 
 interface ProductsRepository {
 

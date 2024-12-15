@@ -13,9 +13,13 @@ object ApiClient {
 
     private val client = OkHttpClient.Builder()
         .addInterceptor(loggingInterceptor)
+        .followRedirects(false)
+        .followSslRedirects(false)
+        .callTimeout(5, java.util.concurrent.TimeUnit.MINUTES)
         .build()
     val retrofit: Retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)
+        .client(client)
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 }

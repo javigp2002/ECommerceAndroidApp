@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.ecommerce.R
 import com.example.ecommerce.adapters.ProductAdapter
 import com.example.ecommerce.dependency.AppContainerImpl
-import com.example.ecommerce.model.Product
+import com.example.ecommerce.domain.repository.model.Product
 
 class ListProductShopFragment private constructor() : Fragment() {
     private lateinit var viewModel: ListProductShopVm

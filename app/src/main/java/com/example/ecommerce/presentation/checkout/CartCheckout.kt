@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.ecommerce.R
 import com.example.ecommerce.adapters.ProductCheckoutAdapter
 import com.example.ecommerce.dependency.AppContainerImpl
-import com.example.ecommerce.model.Product
+import com.example.ecommerce.domain.repository.model.Product
 import com.example.ecommerce.utils.MyNumberFormat
 
 

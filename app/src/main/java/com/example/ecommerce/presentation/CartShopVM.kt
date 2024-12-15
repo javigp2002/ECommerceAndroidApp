@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.ecommerce.domain.repository.ProductsRepository
-import com.example.ecommerce.model.Product
+import com.example.ecommerce.domain.repository.model.Product
 import kotlinx.coroutines.launch
 
 class CartShopVm(private val productsRepository: ProductsRepository) : ViewModel() {

@@ -4,8 +4,8 @@ import android.content.Context
 import android.content.SharedPreferences
 import com.example.ecommerce.MyApplication
 import com.example.ecommerce.api.datasource.products.ProductsDatasource
-import com.example.ecommerce.model.AddProductModel
-import com.example.ecommerce.model.Product
+import com.example.ecommerce.domain.repository.model.AddProductModel
+import com.example.ecommerce.domain.repository.model.Product
 import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -17,7 +17,6 @@ class ProductsRepositoryImpl(private val api: ProductsDatasource) : ProductsRepo
     private val cart: MutableList<Product> = mutableListOf()
 
     init {
-
         val cart = sharedPreferences.getString("cart", "")
         if (!cart.isNullOrEmpty()) {
             this.cart.addAll(Gson().fromJson(cart, Array<Product>::class.java).toMutableList())
@@ -29,6 +28,9 @@ class ProductsRepositoryImpl(private val api: ProductsDatasource) : ProductsRepo
         val products = withContext(Dispatchers.IO) {
             try {
                 api.getAllProducts()
+                    ?.map {
+                        it.copy(onCart = isProductOnCart(it.id))
+                    }?.toMutableList()
             } catch (e: Exception) {
                 mutableListOf()
             }
@@ -53,7 +55,7 @@ class ProductsRepositoryImpl(private val api: ProductsDatasource) : ProductsRepo
     }
 
     override suspend fun addProductToCart(product: Product) {
-        cart.add(product)
+        cart.add(product.copy(onCart = true))
         val cartJson = Gson().toJson(cart)
         sharedPreferences.edit().putString("cart", cartJson).apply()
     }

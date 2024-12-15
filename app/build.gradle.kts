@@ -36,6 +36,7 @@ android {
     }
     buildFeatures {
         compose = true
+        viewBinding = true
     }
 }
 
@@ -52,6 +53,9 @@ dependencies {
     implementation(libs.androidx.viewpager2)
     implementation(libs.material)
     implementation(libs.play.services.maps)
+    implementation(libs.androidx.annotation)
+    implementation(libs.androidx.lifecycle.livedata.ktx)
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

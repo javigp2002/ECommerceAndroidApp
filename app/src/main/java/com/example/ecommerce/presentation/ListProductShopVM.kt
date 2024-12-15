@@ -4,11 +4,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.ecommerce.domain.repository.ProductsRepository
-import com.example.ecommerce.model.Product
+import com.example.ecommerce.domain.repository.model.Product
 import kotlinx.coroutines.launch
 
 class ListProductShopVm(private val productsRepository: ProductsRepository) : ViewModel() {
-    private val actualProducts: MutableList<Product> = mutableListOf()
 
     val products: MutableLiveData<List<Product>> by lazy {
         MutableLiveData<List<Product>>()
@@ -16,16 +15,13 @@ class ListProductShopVm(private val productsRepository: ProductsRepository) : Vi
 
     init {
         viewModelScope.launch {
-            updateActualProductsOnCart()
-
-            products.setValue(actualProducts.toList())
+            products.setValue(productsRepository.getProducts())
         }
     }
 
     fun updateProducts() {
         viewModelScope.launch {
-            updateActualProductsOnCart()
-            products.setValue(actualProducts.toList())
+            products.setValue(productsRepository.getProducts().toList())
         }
     }
 
@@ -33,10 +29,8 @@ class ListProductShopVm(private val productsRepository: ProductsRepository) : Vi
         viewModelScope.launch {
             if (isProductOnCart(product.id)) {
                 productsRepository.removeProductFromCart(product)
-                updateProductsOnCart(product.id, false)
             } else {
                 productsRepository.addProductToCart(product)
-                updateProductsOnCart(product.id, true)
             }
 
             updateProducts()
@@ -46,18 +40,6 @@ class ListProductShopVm(private val productsRepository: ProductsRepository) : Vi
 
     private fun isProductOnCart(id: Long): Boolean {
         return productsRepository.isProductOnCart(id)
-    }
-
-    private fun updateProductsOnCart(productId: Long, isOnCart: Boolean) {
-        actualProducts.find { it.id == productId }?.onCart = isOnCart
-    }
-
-    suspend fun updateActualProductsOnCart() {
-        actualProducts.clear()
-        actualProducts.addAll(productsRepository.getProducts())
-        actualProducts.forEach {
-            it.onCart = productsRepository.isProductOnCart(it.id)
-        }
     }
 
 }
