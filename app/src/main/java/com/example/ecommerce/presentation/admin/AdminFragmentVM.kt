@@ -34,8 +34,15 @@ class AdminFragmentVm(
     }
 
     fun logout() {
-        userRepository.clearUserJwt()
+        viewModelScope.launch {
+            userRepository.clearUserJwt()
+        }
     }
 
-
+    fun deleteProduct(it: Product) {
+        viewModelScope.launch {
+            productsRepository.deleteProduct(it)
+            updateProducts()
+        }
+    }
 }

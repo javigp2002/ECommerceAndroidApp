@@ -15,4 +15,12 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
+    <string name="invalid_product_name">Not valid name</string>
+    <string name="invalid_product_price">Price must be > 0</string>
+
+
+    <string name="edit">Edit</string>
+    <string name="cancel">Cancel</string>
+    <string name="productName">Product\n</string>
+    <string name="price">Price</string>
 </resources>

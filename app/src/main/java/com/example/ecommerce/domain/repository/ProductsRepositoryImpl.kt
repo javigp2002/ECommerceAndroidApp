@@ -46,7 +46,7 @@ class ProductsRepositoryImpl(private val api: ProductsDatasource) : ProductsRepo
     override suspend fun addProductToList(product: AddProductModel) {
         withContext(Dispatchers.IO) {
             try {
-                api.addProduct(product)
+                api.addProduct(product, getTokenString())
             } catch (e: Exception) {
                 e.printStackTrace()
             }
@@ -83,6 +83,39 @@ class ProductsRepositoryImpl(private val api: ProductsDatasource) : ProductsRepo
         cart.clear()
         sharedPreferences.edit().putString("cart", "").apply()
 
+    }
+
+    override suspend fun deleteProduct(it: Product) {
+        withContext(Dispatchers.IO) {
+            try {
+                api.deleteProduct(it.id, getTokenString())
+                return@withContext true
+            } catch (e: Exception) {
+                e.printStackTrace()
+                return@withContext false
+            }
+        }
+    }
+
+    override suspend fun editProduct(product: Product) {
+        withContext(Dispatchers.IO) {
+            try {
+                api.editProduct(
+                    product.id,
+                    AddProductModel(product.name, product.price),
+                    getTokenString()
+                )
+
+                return@withContext true
+            } catch (e: Exception) {
+                e.printStackTrace()
+                return@withContext false
+            }
+        }
+    }
+
+    private fun getTokenString(): String {
+        return "Bearer ${sharedPreferences.getString("token", "")}"
     }
 
     companion object {

@@ -31,9 +31,8 @@ class ListProductShopFragment private constructor() : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         recyclerView = view.findViewById(R.id.recyclerViewProducts)
-        val appContainer = AppContainerImpl()
 
-        viewModel = appContainer.listProductShopVm
+        viewModel = AppContainerImpl.listProductShopVm
 
         recyclerView.layoutManager = GridLayoutManager(this.context, 1)
         recyclerView.adapter = productAdapter

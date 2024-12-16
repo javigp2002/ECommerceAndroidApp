@@ -3,16 +3,16 @@ package com.example.ecommerce.adapters
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import androidx.viewpager2.adapter.FragmentViewHolder
+import com.example.ecommerce.presentation.AdminManagerFragment
 import com.example.ecommerce.presentation.CartShopFragment
 import com.example.ecommerce.presentation.ListProductShopFragment
-import com.example.ecommerce.presentation.admin.AdminFragment
-import com.example.ecommerce.ui.login.LoginFragment
 
 class MainViewPagerAdapter(
-    fragmentActivity: FragmentActivity,
-    private val isUserLoggedIn: Boolean
+    fragmentActivity: FragmentActivity
 ) :
     FragmentStateAdapter(fragmentActivity) {
+    var isUserLoggedIn = false
 
     override fun getItemCount(): Int {
         return 3
@@ -22,12 +22,18 @@ class MainViewPagerAdapter(
         if (position == 1) {
             return CartShopFragment.newInstance()
         } else if (position == 2) {
-            if (isUserLoggedIn) {
-                return AdminFragment.newInstance()
-            }
-            return LoginFragment.newInstance()
+            return AdminManagerFragment()
+
         }
         return ListProductShopFragment.newInstance()
+    }
+
+    override fun onBindViewHolder(
+        holder: FragmentViewHolder,
+        position: Int,
+        payloads: MutableList<Any>
+    ) {
+        super.onBindViewHolder(holder, position, payloads)
     }
 
 }

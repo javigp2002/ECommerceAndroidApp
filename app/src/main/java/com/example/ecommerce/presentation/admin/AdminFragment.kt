@@ -1,5 +1,6 @@
 package com.example.ecommerce.presentation.admin
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +15,9 @@ import com.example.ecommerce.R
 import com.example.ecommerce.adapters.ProductAdminAdapter
 import com.example.ecommerce.dependency.AppContainerImpl
 import com.example.ecommerce.domain.repository.model.Product
+import com.example.ecommerce.presentation.admin.edit.AddProductActivity
+import com.example.ecommerce.presentation.admin.edit.EditProductActivity
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class AdminFragment : Fragment() {
     private lateinit var viewModel: AdminFragmentVm
@@ -22,6 +26,9 @@ class AdminFragment : Fragment() {
     private lateinit var textViewPrice: TextView
     private lateinit var editButton: ImageButton
     private lateinit var deleteButton: ImageButton
+    private lateinit var addFloatingButton: FloatingActionButton
+    private lateinit var logoutFloatingButton: FloatingActionButton
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,23 +43,38 @@ class AdminFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         recyclerView = view.findViewById(R.id.recyclerViewProducts)
         textViewPrice = view.findViewById(R.id.textViewPrice)
-        editButton = view.findViewById(R.id.editButton)
+        editButton = view.findViewById(R.id.addButton)
         deleteButton = view.findViewById(R.id.deleteButton)
+        addFloatingButton = view.findViewById(R.id.addProductFloatingButton)
+        logoutFloatingButton = view.findViewById(R.id.logoutFloatingButton)
 
-
-        viewModel = AppContainerImpl().adminFragmentVM
+        viewModel = AppContainerImpl.adminFragmentVM
 
         recyclerView.layoutManager = GridLayoutManager(this.context, 1)
         recyclerView.adapter = productAdapter
         subscribeToViewModel()
 
         productAdapter.onEditProductClicked = {
-            viewModel.logout()
+            val newIntent = Intent(activity, EditProductActivity::class.java)
+            newIntent.putExtra("productName", it.name)
+            newIntent.putExtra("productPrice", it.price)
+            newIntent.putExtra("productId", it.id)
+            startActivity(newIntent)
         }
 
         productAdapter.onDeleteProductClicked = {
-
+            viewModel.deleteProduct(it)
         }
+
+        addFloatingButton.setOnClickListener {
+            val addProductIntent = Intent(activity, AddProductActivity::class.java)
+            startActivity(addProductIntent)
+        }
+
+        logoutFloatingButton.setOnClickListener {
+            viewModel.logout()
+        }
+
     }
 
     private fun subscribeToViewModel() {

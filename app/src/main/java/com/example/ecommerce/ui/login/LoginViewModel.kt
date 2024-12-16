@@ -26,8 +26,6 @@ class LoginViewModel(
             val result = loginRepository.login(username, password)
 
             if (result is Result.Success) {
-                _loginResult.value =
-                    LoginResult(success = "Login success")
                 userRepository.saveUserJwt(result.data.token)
 
             } else {

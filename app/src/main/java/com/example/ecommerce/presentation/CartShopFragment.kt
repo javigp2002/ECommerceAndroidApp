@@ -40,9 +40,7 @@ class CartShopFragment private constructor() : Fragment() {
         textViewPrice = view.findViewById(R.id.textViewPrice)
         goCheckoutButton = view.findViewById(R.id.goCheckoutButton)
 
-        val appContainer = AppContainerImpl()
-
-        viewModel = appContainer.cartShopVm
+        viewModel = AppContainerImpl.cartShopVm
 
         recyclerView.layoutManager = GridLayoutManager(this.context, 1)
         recyclerView.adapter = productAdapter

@@ -38,7 +38,7 @@ class CartCheckout : FragmentActivity() {
         recyclerView.layoutManager = GridLayoutManager(this, 1)
         recyclerView.adapter = productAdapter
 
-        viewModel = AppContainerImpl().cartCheckoutVm
+        viewModel = AppContainerImpl.cartCheckoutVm
         subscribeToViewModel()
 
 

@@ -42,7 +42,7 @@ class ProductAdminAdapter :
     class ProductViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val textViewName: TextView = itemView.findViewById(R.id.textViewName)
         val textViewPrice: TextView = itemView.findViewById(R.id.textViewPrice)
-        val editProductButton: ImageButton = itemView.findViewById(R.id.editButton)
+        val editProductButton: ImageButton = itemView.findViewById(R.id.addButton)
         val deleteProductButton: ImageButton = itemView.findViewById(R.id.deleteButton)
     }
 

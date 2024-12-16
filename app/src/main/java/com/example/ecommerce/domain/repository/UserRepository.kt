@@ -3,22 +3,33 @@ package com.example.ecommerce.domain.repository
 import android.content.Context
 import android.content.SharedPreferences
 import com.example.ecommerce.MyApplication
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.withContext
 
 class UserRepository {
     private var sharedPreferences: SharedPreferences =
         MyApplication.instance.getSharedPreferences("jwt", Context.MODE_PRIVATE)
 
+    val isUserLoggedIn = MutableSharedFlow<Boolean>()
 
-    fun getUserJwt(): String {
-        return sharedPreferences.getString("jwt", "") ?: ""
+    suspend fun updateUserLoggedInStatus(isLoggedIn: Boolean) {
+        withContext(Dispatchers.IO) {
+            isUserLoggedIn.emit(isLoggedIn)
+        }
     }
 
-    fun saveUserJwt(jwt: String) {
-        sharedPreferences.edit().putString("jwt", jwt).apply()
+    suspend fun saveUserJwt(jwt: String) {
+        withContext(Dispatchers.IO) {
+            sharedPreferences.edit().putString("jwt", jwt).apply()
+            updateUserLoggedInStatus(true)
+        }
     }
 
-    fun clearUserJwt() {
-        sharedPreferences.edit().putString("jwt", "").apply()
+    suspend fun clearUserJwt() {
+        withContext(Dispatchers.IO) {
+            sharedPreferences.edit().putString("jwt", "").apply()
+            updateUserLoggedInStatus(false)
+        }
     }
-
 }

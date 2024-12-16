@@ -1,6 +1,5 @@
 package com.example.ecommerce.ui.login
 
-import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -18,7 +17,6 @@ import androidx.lifecycle.Observer
 import com.example.ecommerce.R
 import com.example.ecommerce.databinding.FragmentLoginBinding
 import com.example.ecommerce.dependency.AppContainerImpl
-import com.example.ecommerce.presentation.MainActivity
 
 class LoginFragment : Fragment() {
 
@@ -45,9 +43,7 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-
-        loginViewModel = AppContainerImpl().loginViewModel
+        loginViewModel = AppContainerImpl.loginViewModel
 
         usernameEditText = binding.username
         passwordEditText = binding.password
@@ -133,8 +129,6 @@ class LoginFragment : Fragment() {
                 }
                 loginResult.success?.let {
                     updateUiWithUser()
-                    val newIntent = Intent(activity, MainActivity::class.java)
-                    startActivity(newIntent)
                 }
             })
 

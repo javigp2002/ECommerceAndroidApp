@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/editButton"
+        app:layout_constraintEnd_toStartOf="@+id/addButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Producto A" />
@@ -28,12 +28,12 @@
         tools:text="20€" />
 
     <ImageButton
-        android:id="@+id/editButton"
+        android:id="@+id/addButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/edit_24px"
+        android:backgroundTint="#FF9800"
         app:layout_constraintEnd_toStartOf="@+id/deleteButton"
-        app:tint="#FFEA00"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
@@ -41,7 +41,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/delete_forever_24px"
-        app:tint="#FF0000"
+        android:backgroundTint="#9D0000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
