@@ -3,7 +3,7 @@ package com.example.ecommerce.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -35,13 +35,18 @@ class ProductAdapter :
         holder.buttonAddProduct.setOnClickListener {
             onProductClicked(product)
         }
-        holder.buttonAddProduct.text = if (product.onCart) onCartName else notOnCartName
+
+        if (product.onCart) {
+            holder.buttonAddProduct.setImageResource(R.drawable.remove_24px)
+        } else {
+            holder.buttonAddProduct.setImageResource(R.drawable.add_shopping_cart_24px)
+        }
     }
 
     class ProductViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val textViewName: TextView = itemView.findViewById(R.id.textViewName)
         val textViewPrice: TextView = itemView.findViewById(R.id.textViewPrice)
-        val buttonAddProduct: Button = itemView.findViewById(R.id.buttonAddProduct)
+        val buttonAddProduct: ImageButton = itemView.findViewById(R.id.buttonAddProduct)
     }
 
     class ProductDiffCallback : DiffUtil.ItemCallback<Product>() {
