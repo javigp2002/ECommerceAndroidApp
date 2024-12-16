@@ -1,4 +1,4 @@
-package com.example.ecommerce.presentation.admin.edit
+package com.example.ecommerce.presentation.secured.admin.edit
 
 import android.os.Bundle
 import android.text.Editable

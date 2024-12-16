@@ -1,4 +1,4 @@
-package com.example.ecommerce.ui.login
+package com.example.ecommerce.presentation.secured.login
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

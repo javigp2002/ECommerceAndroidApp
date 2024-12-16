@@ -1,4 +1,4 @@
-package com.example.ecommerce.ui.login
+package com.example.ecommerce.presentation.secured.login
 
 /**
  * Data validation state of the login form.

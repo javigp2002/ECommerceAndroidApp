@@ -4,9 +4,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.adapter.FragmentViewHolder
-import com.example.ecommerce.presentation.AdminManagerFragment
-import com.example.ecommerce.presentation.CartShopFragment
-import com.example.ecommerce.presentation.ListProductShopFragment
+import com.example.ecommerce.presentation.cart.CartShopFragment
+import com.example.ecommerce.presentation.secured.AdminManagerFragment
+import com.example.ecommerce.presentation.shop.ListProductShopFragment
 
 class MainViewPagerAdapter(
     fragmentActivity: FragmentActivity

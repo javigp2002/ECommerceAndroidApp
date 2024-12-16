@@ -1,4 +1,4 @@
-package com.example.ecommerce.presentation.checkout
+package com.example.ecommerce.presentation.cart.checkout
 
 import android.app.AlertDialog
 import android.app.Dialog

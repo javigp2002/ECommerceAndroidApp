@@ -1,4 +1,4 @@
-package com.example.ecommerce.presentation
+package com.example.ecommerce.presentation.cart
 
 import android.content.Intent
 import android.os.Bundle
@@ -15,7 +15,7 @@ import com.example.ecommerce.R
 import com.example.ecommerce.adapters.ProductAdapter
 import com.example.ecommerce.dependency.AppContainerImpl
 import com.example.ecommerce.domain.repository.model.Product
-import com.example.ecommerce.presentation.checkout.CartCheckout
+import com.example.ecommerce.presentation.cart.checkout.CartCheckout
 import com.example.ecommerce.utils.MyNumberFormat
 
 class CartShopFragment private constructor() : Fragment() {

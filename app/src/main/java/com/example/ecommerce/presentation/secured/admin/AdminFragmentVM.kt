@@ -1,4 +1,4 @@
-package com.example.ecommerce.presentation.admin
+package com.example.ecommerce.presentation.secured.admin
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

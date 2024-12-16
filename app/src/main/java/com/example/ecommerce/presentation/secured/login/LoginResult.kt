@@ -1,4 +1,4 @@
-package com.example.ecommerce.ui.login
+package com.example.ecommerce.presentation.secured.login
 
 /**
  * Authentication result : success (user details) or error message.

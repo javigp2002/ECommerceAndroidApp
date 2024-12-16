@@ -1,4 +1,4 @@
-package com.example.ecommerce.presentation.checkout
+package com.example.ecommerce.presentation.cart.checkout
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

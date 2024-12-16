@@ -1,4 +1,4 @@
-package com.example.ecommerce.presentation
+package com.example.ecommerce.presentation.secured
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,8 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.example.ecommerce.R
 import com.example.ecommerce.dependency.AppContainerImpl.userRepository
-import com.example.ecommerce.presentation.admin.AdminFragment
-import com.example.ecommerce.ui.login.LoginFragment
+import com.example.ecommerce.presentation.secured.admin.AdminFragment
+import com.example.ecommerce.presentation.secured.login.LoginFragment
 import kotlinx.coroutines.launch
 
 class AdminManagerFragment : Fragment() {

@@ -1,4 +1,4 @@
-package com.example.ecommerce.presentation
+package com.example.ecommerce.presentation.shop
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

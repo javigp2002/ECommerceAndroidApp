@@ -26,7 +26,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".presentation.checkout.CartCheckout"
+            android:name=".presentation.cart.checkout.CartCheckout"
             android:exported="true"
             android:theme="@style/Theme.ECommerce">
             <intent-filter>
@@ -46,7 +46,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".presentation.admin.edit.EditProductActivity"
+            android:name=".presentation.secured.admin.edit.EditProductActivity"
             android:exported="true"
             android:theme="@style/Theme.ECommerce">
             <intent-filter>

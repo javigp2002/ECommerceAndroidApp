@@ -7,13 +7,13 @@ import com.example.ecommerce.domain.repository.LoginRepository
 import com.example.ecommerce.domain.repository.ProductsRepository
 import com.example.ecommerce.domain.repository.ProductsRepositoryImpl
 import com.example.ecommerce.domain.repository.UserRepository
-import com.example.ecommerce.presentation.CartShopVm
-import com.example.ecommerce.presentation.ListProductShopVm
-import com.example.ecommerce.presentation.admin.AdminFragmentVm
 import com.example.ecommerce.presentation.admin.edit.AddProductVm
-import com.example.ecommerce.presentation.admin.edit.EditProductVm
-import com.example.ecommerce.presentation.checkout.CartCheckoutVM
-import com.example.ecommerce.ui.login.LoginViewModel
+import com.example.ecommerce.presentation.cart.CartShopVm
+import com.example.ecommerce.presentation.cart.checkout.CartCheckoutVM
+import com.example.ecommerce.presentation.secured.admin.AdminFragmentVm
+import com.example.ecommerce.presentation.secured.admin.edit.EditProductVm
+import com.example.ecommerce.presentation.secured.login.LoginViewModel
+import com.example.ecommerce.presentation.shop.ListProductShopVm
 
 object AppContainerImpl {
     val productDatasource: ProductsDatasource by lazy {

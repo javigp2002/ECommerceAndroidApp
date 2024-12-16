@@ -1,4 +1,4 @@
-package com.example.ecommerce.presentation.admin.edit
+package com.example.ecommerce.presentation.secured.admin.edit
 
 data class EditFormState(
     val nameError: Int? = null,

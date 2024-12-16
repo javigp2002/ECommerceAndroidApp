@@ -1,4 +1,4 @@
-package com.example.ecommerce.presentation.admin
+package com.example.ecommerce.presentation.secured.admin
 
 import android.content.Intent
 import android.os.Bundle
@@ -16,7 +16,7 @@ import com.example.ecommerce.adapters.ProductAdminAdapter
 import com.example.ecommerce.dependency.AppContainerImpl
 import com.example.ecommerce.domain.repository.model.Product
 import com.example.ecommerce.presentation.admin.edit.AddProductActivity
-import com.example.ecommerce.presentation.admin.edit.EditProductActivity
+import com.example.ecommerce.presentation.secured.admin.edit.EditProductActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class AdminFragment : Fragment() {
