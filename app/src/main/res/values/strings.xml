@@ -23,4 +23,5 @@
     <string name="cancel">Cancel</string>
     <string name="productName">Product\n</string>
     <string name="price">Price</string>
+    <string name="title_activity_maps">MapsActivity</string>
 </resources>

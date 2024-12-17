@@ -1,5 +1,6 @@
 package com.example.ecommerce.presentation.shop
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,11 +13,15 @@ import com.example.ecommerce.R
 import com.example.ecommerce.adapters.ProductAdapter
 import com.example.ecommerce.dependency.AppContainerImpl
 import com.example.ecommerce.domain.repository.model.Product
+import com.example.ecommerce.presentation.map.MapsActivity
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class ListProductShopFragment private constructor() : Fragment() {
     private lateinit var viewModel: ListProductShopVm
     private val productAdapter = ProductAdapter()
     private lateinit var recyclerView: RecyclerView
+    private lateinit var floatingButton: FloatingActionButton
+
 
 
     override fun onCreateView(
@@ -31,6 +36,7 @@ class ListProductShopFragment private constructor() : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         recyclerView = view.findViewById(R.id.recyclerViewProducts)
+        floatingButton = view.findViewById(R.id.floatingActionButton)
 
         viewModel = AppContainerImpl.listProductShopVm
 
@@ -40,6 +46,11 @@ class ListProductShopFragment private constructor() : Fragment() {
 
         productAdapter.onProductClicked = {
             viewModel.manageProduct(it)
+        }
+
+        floatingButton.setOnClickListener {
+            val intent = Intent(this.context, MapsActivity::class.java)
+            startActivity(intent)
         }
     }
 
