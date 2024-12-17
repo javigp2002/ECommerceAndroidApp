@@ -9,11 +9,12 @@ import kotlinx.coroutines.launch
 
 enum class CartCheckoutAction {
     BUY,
-    CANCEL
+    CANCEL,
+    NONE
 }
 
 class CartCheckoutVM(private val productsRepository: ProductsRepository) : ViewModel() {
-    private val actualCartProductsList: MutableList<Product> = mutableListOf()
+    private var actualCartProductsList: List<Product> = listOf()
     private var totalValueProducts: Double = 0.0
 
     val productsLiveData: MutableLiveData<List<Product>> by lazy {
@@ -30,9 +31,9 @@ class CartCheckoutVM(private val productsRepository: ProductsRepository) : ViewM
 
     init {
         viewModelScope.launch {
-            actualCartProductsList.addAll(productsRepository.getCartProducts())
+            actualCartProductsList = productsRepository.getCartProducts()
             updateValueProduct()
-            productsLiveData.setValue(actualCartProductsList.toList())
+            productsLiveData.setValue(actualCartProductsList)
             totalPriceLiveData.setValue(totalValueProducts)
         }
     }
@@ -42,12 +43,23 @@ class CartCheckoutVM(private val productsRepository: ProductsRepository) : ViewM
         viewModelScope.launch {
             productsRepository.buyCartProducts()
             actionLiveData.setValue(CartCheckoutAction.BUY)
+            actionLiveData.setValue(CartCheckoutAction.NONE)
         }
     }
 
     fun cancelPurchase() {
         viewModelScope.launch {
             actionLiveData.setValue(CartCheckoutAction.CANCEL)
+            actionLiveData.setValue(CartCheckoutAction.NONE)
+        }
+    }
+
+    fun updateProducts() {
+        viewModelScope.launch {
+            actualCartProductsList = productsRepository.getCartProducts()
+            updateValueProduct()
+            productsLiveData.setValue(actualCartProductsList)
+            totalPriceLiveData.setValue(totalValueProducts)
         }
     }
 
@@ -56,6 +68,13 @@ class CartCheckoutVM(private val productsRepository: ProductsRepository) : ViewM
         totalValueProducts = 0.0
         actualCartProductsList.forEach {
             totalValueProducts += it.price
+        }
+    }
+
+    fun cleanCart() {
+        viewModelScope.launch {
+            productsRepository.cleanCart()
+
         }
     }
 

@@ -3,6 +3,8 @@ package com.example.ecommerce.api.datasource.products
 import com.example.ecommerce.domain.repository.model.AddProductModel
 import com.example.ecommerce.domain.repository.model.Product
 import retrofit2.http.Body
+import retrofit2.http.Field
+import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
@@ -33,4 +35,16 @@ interface ProductsDatasource {
         @Body product: AddProductModel,
         @Header("Authorization") tokenString: String
     )
+
+    @FormUrlEncoded
+    @POST("/api/cart/add")
+    suspend fun addProductToCart(@Field("id") id: Long)
+
+    @GET("/api/cart/deleteAll")
+    suspend fun cleanCart()
+
+    @FormUrlEncoded
+    @POST("/api/cart/delete")
+    suspend fun deleteCartProduct(@Field("id") id: Long)
+
 }

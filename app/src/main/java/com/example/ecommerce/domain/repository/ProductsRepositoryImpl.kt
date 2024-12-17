@@ -56,9 +56,29 @@ class ProductsRepositoryImpl(private val api: ProductsDatasource) : ProductsRepo
     }
 
     override suspend fun addProductToCart(product: Product) {
+        withContext(Dispatchers.IO) {
+            try {
+                api.addProductToCart(product.id)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+
+        }
+
         cart = cart + product.copy(onCart = true)
         val cartJson = Gson().toJson(cart)
+
         sharedPreferences.edit().putString("cart", cartJson).apply()
+    }
+
+    override suspend fun cleanCart() {
+        withContext(Dispatchers.IO) {
+            try {
+                api.cleanCart()
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
     }
 
     override fun isProductOnCart(productId: Long): Boolean {
@@ -66,6 +86,14 @@ class ProductsRepositoryImpl(private val api: ProductsDatasource) : ProductsRepo
     }
 
     override suspend fun removeProductFromCart(product: Product) {
+        withContext(Dispatchers.IO) {
+            try {
+                api.deleteCartProduct(product.id)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+
         cart = cart.filter { it.id != product.id }
         val cartJson = Gson().toJson(cart)
         sharedPreferences.edit().putString("cart", cartJson).apply()

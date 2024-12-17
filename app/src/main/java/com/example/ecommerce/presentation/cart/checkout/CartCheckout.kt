@@ -51,6 +51,14 @@ class CartCheckout : FragmentActivity() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.updateProducts()
+        val dialogFragment = supportFragmentManager.findFragmentByTag("okDialog") as? DialogFragment
+        dialogFragment?.dismiss()
+
+    }
+
 
     private fun subscribeToViewModel() {
         val products = Observer { products: List<Product> ->
@@ -67,12 +75,16 @@ class CartCheckout : FragmentActivity() {
         val action = Observer { action: CartCheckoutAction ->
             when (action) {
                 CartCheckoutAction.BUY -> {
-                    okDialogFragment().show(supportFragmentManager, "dialog")
+                    viewModel.cleanCart()
+                    okDialogFragment().show(supportFragmentManager, "okDialog")
+
                 }
 
                 CartCheckoutAction.CANCEL -> {
-                    finish()
+                    this.onBackPressedDispatcher.onBackPressed()
                 }
+
+                CartCheckoutAction.NONE -> {}
             }
         }
 
@@ -88,9 +100,10 @@ class okDialogFragment : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return activity?.let {
             val builder = AlertDialog.Builder(it)
-            builder.setMessage("Buy completed Correctly")
+            builder.setMessage("Buy completed correctly")
                 .setPositiveButton("OK") { dialog, id ->
-                    activity?.finish()
+                    requireActivity().onBackPressedDispatcher.onBackPressed()
+
                 }
             builder.create()
         } ?: throw IllegalStateException("Activity cannot be null")
