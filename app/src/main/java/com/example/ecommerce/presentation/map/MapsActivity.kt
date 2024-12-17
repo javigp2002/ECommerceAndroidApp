@@ -137,7 +137,14 @@ class MapsActivity() : FragmentActivity(),
     override fun onResumeFragments() {
         super.onResumeFragments()
         if (permissionDenied) {
-            map.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(0.0, 0.0), 15f))
+            map.moveCamera(
+                CameraUpdateFactory.newLatLngZoom(
+                    LatLng(
+                        37.42213927837947,
+                        -122.08532420321409
+                    ), 15f
+                )
+            )
             permissionDenied = false
         }
     }
