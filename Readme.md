@@ -79,3 +79,8 @@ Estas se emplean a través del cliente de retrofit y en la capa de 'Datasource'.
     - `POST /api/cart/delete`: Eliminar un producto del carrito.
 - **UserApi**:
     - `POST /api/user/login`: Iniciar sesión.
+
+# Autores
+
+- Rafael Delgado García-Valdecasas
+- Javier González Peregrín
