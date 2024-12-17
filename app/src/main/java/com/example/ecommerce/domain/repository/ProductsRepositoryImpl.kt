@@ -14,31 +14,32 @@ class ProductsRepositoryImpl(private val api: ProductsDatasource) : ProductsRepo
     private var sharedPreferences: SharedPreferences =
         MyApplication.instance.getSharedPreferences("cart", Context.MODE_PRIVATE)
 
-    private val cart: MutableList<Product> = mutableListOf()
+    private var cart: List<Product> = listOf()
 
     init {
         val cart = sharedPreferences.getString("cart", "")
         if (!cart.isNullOrEmpty()) {
-            this.cart.addAll(Gson().fromJson(cart, Array<Product>::class.java).toMutableList())
+            this.cart = (Gson().fromJson(cart, Array<Product>::class.java))?.toList() ?: listOf()
         }
     }
 
 
-    override suspend fun getProducts(): MutableList<Product> {
+    override suspend fun getProducts(): List<Product> {
         val products = withContext(Dispatchers.IO) {
             try {
                 api.getAllProducts()
                     ?.map {
                         it.copy(onCart = isProductOnCart(it.id))
-                    }?.toMutableList()
+                    }?.toList()
             } catch (e: Exception) {
-                mutableListOf()
+                listOf()
             }
         }
-        return products ?: mutableListOf()
+
+        return products ?: listOf()
     }
 
-    override suspend fun getCartProducts(): MutableList<Product> {
+    override suspend fun getCartProducts(): List<Product> {
         return cart
     }
 
@@ -55,7 +56,7 @@ class ProductsRepositoryImpl(private val api: ProductsDatasource) : ProductsRepo
     }
 
     override suspend fun addProductToCart(product: Product) {
-        cart.add(product.copy(onCart = true))
+        cart = cart + product.copy(onCart = true)
         val cartJson = Gson().toJson(cart)
         sharedPreferences.edit().putString("cart", cartJson).apply()
     }
@@ -65,7 +66,7 @@ class ProductsRepositoryImpl(private val api: ProductsDatasource) : ProductsRepo
     }
 
     override suspend fun removeProductFromCart(product: Product) {
-        cart.remove(product)
+        cart = cart.filter { it.id != product.id }
         val cartJson = Gson().toJson(cart)
         sharedPreferences.edit().putString("cart", cartJson).apply()
     }
@@ -80,7 +81,7 @@ class ProductsRepositoryImpl(private val api: ProductsDatasource) : ProductsRepo
             }
 
         }
-        cart.clear()
+        cart = listOf()
         sharedPreferences.edit().putString("cart", "").apply()
 
     }

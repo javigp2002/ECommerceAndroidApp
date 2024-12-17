@@ -12,7 +12,7 @@ import retrofit2.http.Path
 interface ProductsDatasource {
 
     @GET("api/products/all")
-    suspend fun getAllProducts(): MutableList<Product>?
+    suspend fun getAllProducts(): List<Product>?
 
 
     @POST("/api/products/add")
@@ -22,7 +22,7 @@ interface ProductsDatasource {
     ): String
 
     @POST("/api/cart/buy")
-    suspend fun buyCartProducts(cart: MutableList<Product>)
+    suspend fun buyCartProducts(cart: List<Product>)
 
     @GET("/api/products/delete/{id}")
     suspend fun deleteProduct(@Path(value = "id") it: Long, @Header("Authorization") token: String)

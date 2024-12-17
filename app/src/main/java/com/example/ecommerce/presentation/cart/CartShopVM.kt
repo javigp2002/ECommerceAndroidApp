@@ -8,7 +8,7 @@ import com.example.ecommerce.domain.repository.model.Product
 import kotlinx.coroutines.launch
 
 class CartShopVm(private val productsRepository: ProductsRepository) : ViewModel() {
-    private val actualProducts: MutableList<Product> = mutableListOf()
+    private var actualProducts: List<Product> = listOf()
     private var totalValueProducts: Double = 0.0
 
 
@@ -22,7 +22,7 @@ class CartShopVm(private val productsRepository: ProductsRepository) : ViewModel
 
     init {
         viewModelScope.launch {
-            actualProducts.addAll(productsRepository.getCartProducts())
+            actualProducts = productsRepository.getCartProducts()
 
             products.setValue(actualProducts.toList())
             valueObserver.setValue(totalValueProducts)
@@ -31,12 +31,11 @@ class CartShopVm(private val productsRepository: ProductsRepository) : ViewModel
 
     fun updateProducts() {
         viewModelScope.launch {
-            actualProducts.clear()
-            actualProducts.addAll(productsRepository.getCartProducts())
+            actualProducts = (productsRepository.getCartProducts())
 
             updateValueProduct()
 
-            products.setValue(actualProducts.toList())
+            products.setValue(actualProducts)
             valueObserver.setValue(totalValueProducts)
         }
     }

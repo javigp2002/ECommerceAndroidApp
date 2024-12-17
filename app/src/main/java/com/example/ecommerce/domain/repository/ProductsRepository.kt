@@ -5,8 +5,8 @@ import com.example.ecommerce.domain.repository.model.Product
 
 interface ProductsRepository {
 
-    suspend fun getProducts(): MutableList<Product>
-    suspend fun getCartProducts(): MutableList<Product>
+    suspend fun getProducts(): List<Product>
+    suspend fun getCartProducts(): List<Product>
     suspend fun addProductToList(product: AddProductModel)
     suspend fun addProductToCart(product: Product)
     fun isProductOnCart(productId: Long): Boolean

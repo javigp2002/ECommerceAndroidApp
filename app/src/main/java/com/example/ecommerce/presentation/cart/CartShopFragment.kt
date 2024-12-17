@@ -58,7 +58,6 @@ class CartShopFragment private constructor() : Fragment() {
 
     private fun subscribeToViewModel() {
         val products = Observer { products: List<Product> ->
-            recyclerView.adapter = productAdapter
             productAdapter.submitList(products.toList())
         }
 

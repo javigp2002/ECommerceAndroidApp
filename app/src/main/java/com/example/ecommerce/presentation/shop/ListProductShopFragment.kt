@@ -2,6 +2,7 @@ package com.example.ecommerce.presentation.shop
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -56,8 +57,8 @@ class ListProductShopFragment private constructor() : Fragment() {
 
     private fun subscribeToViewModel() {
         val products = Observer { products: List<Product> ->
-            recyclerView.adapter = productAdapter
-            productAdapter.submitList(products.toList())
+            Log.d("Javi", "${products}")
+            productAdapter.submitList(products)
         }
 
         viewModel.products.observe(viewLifecycleOwner, products)
