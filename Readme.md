@@ -69,7 +69,7 @@ como Google plantea que se realize.
 Estas se emplean a través del cliente de retrofit y en la capa de 'Datasource'. Dividimos en dos:
 
 - **ProductApi**:
-    - `GET /api/products/products`: Obtiene todos los productos.
+  - `GET /api/products/all`: Obtiene todos los productos.
     - `POST /api/products/add`: Añadir un producto. **ADMIN**
     - `POST /api/products/delete/{id}`: Elimina un producto. **ADMIN**
     - `PUT /api/products/edit/{id}`: Actualiza un producto. **ADMIN**
