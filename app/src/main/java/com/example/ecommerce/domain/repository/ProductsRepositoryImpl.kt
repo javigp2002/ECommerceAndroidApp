@@ -102,7 +102,7 @@ class ProductsRepositoryImpl(private val api: ProductsDatasource) : ProductsRepo
     override suspend fun buyCartProducts() {
         withContext(Dispatchers.IO) {
             try {
-                api.buyCartProducts(cart)
+                api.buyCartProducts()
 
             } catch (e: Exception) {
                 e.printStackTrace()
